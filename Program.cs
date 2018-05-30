@@ -61,6 +61,8 @@ namespace LearningGameCsharp
 
         private static int InputLine ()
         {
+            var Kind = new State.State();
+            Kind.On ( State.State.Kind.All);
             Boolean Loop = false;
             string InputKey = string.Empty;
             int Num = 0;
@@ -81,6 +83,19 @@ namespace LearningGameCsharp
                 }
             }
             return Num;
+        }
+
+        private Dictionary<string,Char.Skill.SkillBase> SetSkill ()
+        {
+            var SkillDate = new Dictionary<string, Char.Skill.SkillBase>();
+
+            SkillDate.Add("001", new Char.Skill.SkillBase("001","テンペスト・ブレード","ATK", "1.2", 1, 2));
+            SkillDate.Add("002", new Char.Skill.SkillBase("002","ファイアI","ATK","1.4", 2, 3));
+            SkillDate.Add("002", new Char.Skill.SkillBase("003", "ファランクス","BUFF", "1.4", 2, 3));
+
+            return SkillDate;
+
+           
         }
 
         private static void LineView()

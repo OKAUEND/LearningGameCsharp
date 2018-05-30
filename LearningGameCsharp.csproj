@@ -44,12 +44,16 @@
   <ItemGroup>
     <Compile Include="Char\BaseInfo\Playeable.cs" />
     <Compile Include="Char\CharBase.cs" />
+    <Compile Include="Char\Skill\SkillBase.cs" />
     <Compile Include="Numeric\ExNumber.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Status\BitFlag.cs" />
+    <Compile Include="Status\State.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
