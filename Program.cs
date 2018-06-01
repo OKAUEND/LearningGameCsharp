@@ -11,12 +11,23 @@ namespace LearningGameCsharp
         static void Main(string[] args)
         {
 
-            var Djeeta = new Char.CharBase("ジータ", "ヒューマン", "女", 500, 20, 2);
+            var AllSkill = SetSkill();
 
+            var Djeeta = new Char.CharBase("ジータ", "ヒューマン", "女", 500, 20, 2);
+            var DjeetaUseSkill = new List<string>
+            {
+                "001",
+                "002",
+                "003"
+            };
+            Djeeta.SetUseSkilInfo(DjeetaUseSkill);
+            Djeeta.SetUseSkill(AllSkill);
             var Enemy = new Char.CharBase("コキュートス", "エネミー", "-", 1000, 40, 5);
 
             var Random = new Random();
             int BehaviorSelection = 0;
+
+
 
             Boolean Game = false;
             do
@@ -61,10 +72,6 @@ namespace LearningGameCsharp
 
         private static int InputLine ()
         {
-            var Kind = new State.State();
-            Kind.On ( State.State.Kind.Poison|State.State.Kind.Palsy);
-            var Poi = Kind.IsEither(State.State.Kind.Sleep);
-
             Boolean Loop = false;
             string InputKey = string.Empty;
             int Num = 0;
@@ -87,17 +94,31 @@ namespace LearningGameCsharp
             return Num;
         }
 
-        private Dictionary<string,Char.Skill.SkillBase> SetSkill ()
+        private static Dictionary<string, Char.Skill.SkillBase> SetSkill()
         {
-            var SkillDate = new Dictionary<string, Char.Skill.SkillBase>();
 
-            SkillDate.Add("001", new Char.Skill.SkillBase("001","テンペスト・ブレード","ATK", "1.2", 1, 2));
-            SkillDate.Add("002", new Char.Skill.SkillBase("002","ファイアI","ATK","1.4", 2, 3));
-            SkillDate.Add("002", new Char.Skill.SkillBase("003", "ファランクス","BUFF", "1.4", 2, 3));
+            var SkillList = new List<Char.Skill.SkillBase>
+            {
+                new Char.Skill.SkillBase("001", "テンペスト・ブレード", CreateList("Attack"), "1.2", 0, 1, 2),
+                new Char.Skill.SkillBase("002", "レイジI", CreateList("Buff"), "1.2", 0, 2, 3),
+                new Char.Skill.SkillBase("003", "ファランクスI", CreateList("Defence"), "50", 0, 3, 4),
+                new Char.Skill.SkillBase("004", "ヒールI", CreateList("Heal"), "0", 200, 3, 4)
+            };
 
+            Dictionary<string,Char.Skill.SkillBase> SkillDate = new Dictionary<string,Char.Skill.SkillBase>();
+            foreach(var skill in SkillList)
+            {
+                SkillDate.Add(key: skill.SkillID, value: skill);
+            }
             return SkillDate;
-
            
+        }
+
+        private static List<string> CreateList(string TypeOne)
+        {
+            var TypeList = new List<string> { TypeOne};
+            return TypeList;
+                
         }
 
         private static void LineView()

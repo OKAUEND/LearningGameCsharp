@@ -15,6 +15,8 @@ namespace LearningGameCsharp.State
             Debuff = 0x00;
         }
 
+        private const Double PoisonRation = 0.05;
+
         [Flags]
         public enum Kind
         {
@@ -28,7 +30,7 @@ namespace LearningGameCsharp.State
             Stone   = 1 << 3,
             //呪い
             Curse   = 1 << 4,
-
+            //すべて
             All     = 0xFF,
         }
 
@@ -54,6 +56,16 @@ namespace LearningGameCsharp.State
         public Boolean IsTurnInactivity()
         {
             return (Debuff & Kind.Palsy | Kind.Sleep | Kind.Stone) != 0;
+        }
+
+        public int ContinuedDamage(Double MaxHelthPoint)
+        {
+            if(IsEither(Kind.Poison))
+            {
+                var ContinuedDamage = MaxHelthPoint * PoisonRation;
+                return (int)ContinuedDamage;
+            }
+            return 0;
         }
 
     }

@@ -8,22 +8,22 @@ namespace LearningGameCsharp.Numeric
 {
     class ExNumber
     {
-        private float ExMax ; //最大値
-        private float ExMin ; //最小値
-        private float ExPre ; //現在地
+        private Double ExMax ; //最大値
+        private Double ExMin ; //最小値
+        private Double ExPre ; //現在地
 
-        public ExNumber(float max = 0,float min = 0 , float pre = 0)
+        public ExNumber(Double max = 0,Double min = 0 , Double pre = 0)
         {
             ExMax = max;
             ExMin = min;
             ExPre = pre;
         }
 
-        public float GetMax() { return ExMax; }
-        public float GetMin() { return ExMin; }
-        public float Get() { return ExPre; }
+        public Double GetMax() { return ExMax; }
+        public Double GetMin() { return ExMin; }
+        public Double Get() { return ExPre; }
 
-        public void SetMax(float value)
+        public void SetMax(Double value)
         {
             ExMax = Math.Max(ExMin, value);
             if (ExMax<Get())
@@ -31,7 +31,7 @@ namespace LearningGameCsharp.Numeric
                 Set(ExMax);
             }
         }
-        public void SetMin(float value)
+        public void SetMin(Double value)
         {
             ExMin = Math.Min(value, ExMin);
             if (Get() <ExMin)
@@ -40,25 +40,25 @@ namespace LearningGameCsharp.Numeric
             }
         }
 
-        public void Set(float value)
+        public void Set(Double value)
         {
             value = Math.Min(value, ExMax);
             value = Math.Max(value, ExMin);
             ExPre = value;
         }
 
-        public float Add(float value)
+        public Double Add(Double value)
         {
             Set(Get() + value);
             return Get();
         }
 
-        public float AddMax(float value)
+        public Double AddMax(Double value)
         {
             SetMax(GetMax() + value);
             return GetMax();
         }
-        public float AddMin(float value)
+        public Double AddMin(Double value)
         {
             SetMin(GetMin() + value);
             return GetMin();
@@ -68,7 +68,7 @@ namespace LearningGameCsharp.Numeric
 
         public Boolean ISFull() => (GetMax() <= Get());
 
-        public float Rate() => (Get() / GetMax());
+        public Double Rate() => (Get() / GetMax());
 
     }
 }

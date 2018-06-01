@@ -10,31 +10,31 @@ namespace LearningGameCsharp.Char
     {
         //protected string CharName { get; set; }
         protected BaseInfo.Playeable CharDate;
-        protected Numeric.ExNumber HP ;
-        protected Numeric.ExNumber MP ;
+        protected Numeric.ExNumber HP;
+        protected Numeric.ExNumber MP;
         protected Numeric.ExNumber ATK;
         protected Numeric.ExNumber DEF;
         protected float DEFBUFF;
+        protected List<string> UseSkillList;
+        protected List<Skill.SkillBase> MySkill = new List<Skill.SkillBase>();
 
-        public CharBase(string SetName, string SetRace, string SetSex,int SetHP ,int SetATK,int SetDEF)
+        public CharBase(string SetName, string SetRace, string SetSex, int SetHP, int SetATK, int SetDEF)
         {
             CharDate = new BaseInfo.Playeable(SetName, SetRace, SetSex);
-            HP = new Numeric.ExNumber(SetHP,0, SetHP);
+            HP = new Numeric.ExNumber(SetHP, 0, SetHP);
             MP = new Numeric.ExNumber(0, 0, 0);
-            ATK = new Numeric.ExNumber(SetATK,0,SetATK);
+            ATK = new Numeric.ExNumber(SetATK, 0, SetATK);
             DEF = new Numeric.ExNumber(SetDEF, 0, SetDEF);
-            DEFBUFF = 0;
-
         }
 
         public void Attack(CharBase @char)
         {
             var Damage = (ATK.Get() - (@char.DEF.Get() * @char.DEFBUFF));
-            DamegeShow(Damage,@char.CharDate.GetName());
+            DamegeShow(Damage, @char.CharDate.GetName());
             @char.HP.Set(@char.HP.Get() - Damage);
         }
 
-        private void DamegeShow(float Damege,string EnemyName)
+        private void DamegeShow(Double Damege, string EnemyName)
         {
             Console.WriteLine(CharDate.GetName() + "の攻撃！");
             Console.WriteLine(EnemyName + "に" + Damege.ToString() + "のダメージ！");
@@ -55,7 +55,7 @@ namespace LearningGameCsharp.Char
 
         public string Info()
         {
-            return  (CharDate.GetName() + "のHP：" + HP.Get().ToString());
+            return (CharDate.GetName() + "のHP：" + HP.Get().ToString());
         }
 
         public void TurnReset()
@@ -66,6 +66,19 @@ namespace LearningGameCsharp.Char
         public Boolean IsState()
         {
             return HP.IsEmpty();
+        }
+
+        public void SetUseSkilInfo(List<string> list)
+        {
+            UseSkillList = list;
+        }
+
+        public void SetUseSkill(Dictionary<string, Char.Skill.SkillBase> skilldic)
+        {
+            foreach(string SkillID in UseSkillList)
+            {
+                MySkill.Add(skilldic[SkillID]);
+            }
         }
     }
 }
