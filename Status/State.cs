@@ -18,20 +18,42 @@ namespace LearningGameCsharp.State
         [Flags]
         public enum Kind
         {
-            Palsy   = 1,
+            //麻痺
+            Palsy   = 1 << 0,
+            //毒
             Poison  = 1 << 1,
+            //睡眠
             Sleep   = 1 << 2,
+            //石化
+            Stone   = 1 << 3,
+            //呪い
+            Curse   = 1 << 4,
+
             All     = 0xFF,
         }
 
-        public void reset()
+        public void Reset()
         {
-            Debuff = 0;
+            Off(Kind.All);
         }
 
-        public void On(Kind Flag)
+        public void On(Kind Flag) => Debuff |= Flag;
+
+        public void Off(Kind Flag) => Debuff &= ~Flag;
+
+        public Boolean IsKind(Kind Flag)
         {
-            Debuff |= Flag;
+            return (Debuff == Flag);
+        }
+
+        public Boolean IsEither(Kind Flag)
+        {
+            return (Debuff & Flag) != 0;
+        }
+
+        public Boolean IsTurnInactivity()
+        {
+            return (Debuff & Kind.Palsy | Kind.Sleep | Kind.Stone) != 0;
         }
 
     }

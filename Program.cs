@@ -62,7 +62,9 @@ namespace LearningGameCsharp
         private static int InputLine ()
         {
             var Kind = new State.State();
-            Kind.On ( State.State.Kind.All);
+            Kind.On ( State.State.Kind.Poison|State.State.Kind.Palsy);
+            var Poi = Kind.IsEither(State.State.Kind.Sleep);
+
             Boolean Loop = false;
             string InputKey = string.Empty;
             int Num = 0;

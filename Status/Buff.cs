@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace LearningGameCsharp.Status
 {
-    class BitFlag
+    class Buff
     {
-        private char mFlag;
+        private char StatusBuff;
 
         public void Reset()
         {
-            mFlag = '0';
+            
         }
 
-        public void off(char flag)
+        public void off(State.State.Kind flag)
         {
             //mFlag = mFlag & ~flag;
         }
