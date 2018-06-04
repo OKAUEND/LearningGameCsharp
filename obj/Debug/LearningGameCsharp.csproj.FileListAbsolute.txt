@@ -1,7 +1,7 @@
 d:\Users\DeExl\Documents\Visual Studio 2017\Projects\LearningGameCsharp\LearningGameCsharp\bin\Debug\LearningGameCsharp.exe.config
 d:\Users\DeExl\Documents\Visual Studio 2017\Projects\LearningGameCsharp\LearningGameCsharp\bin\Debug\LearningGameCsharp.exe
 d:\Users\DeExl\Documents\Visual Studio 2017\Projects\LearningGameCsharp\LearningGameCsharp\bin\Debug\LearningGameCsharp.pdb
-d:\Users\DeExl\Documents\Visual Studio 2017\Projects\LearningGameCsharp\LearningGameCsharp\obj\Debug\LearningGameCsharp.csprojResolveAssemblyReference.cache
 d:\Users\DeExl\Documents\Visual Studio 2017\Projects\LearningGameCsharp\LearningGameCsharp\obj\Debug\LearningGameCsharp.csproj.CoreCompileInputs.cache
 d:\Users\DeExl\Documents\Visual Studio 2017\Projects\LearningGameCsharp\LearningGameCsharp\obj\Debug\LearningGameCsharp.exe
 d:\Users\DeExl\Documents\Visual Studio 2017\Projects\LearningGameCsharp\LearningGameCsharp\obj\Debug\LearningGameCsharp.pdb
+d:\Users\DeExl\Documents\Visual Studio 2017\Projects\LearningGameCsharp\LearningGameCsharp\obj\Debug\LearningGameCsharp.csprojAssemblyReference.cache

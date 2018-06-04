@@ -12,31 +12,49 @@ namespace LearningGameCsharp.Char
         protected BaseInfo.Playeable CharDate;
         protected Numeric.ExNumber HP;
         protected Numeric.ExNumber MP;
-        protected Numeric.ExNumber ATK;
-        protected Numeric.ExNumber DEF;
+        protected int ATK;
+        protected int DEF;
         protected float DEFBUFF;
-        protected List<string> UseSkillList;
-        protected List<Skill.SkillBase> MySkill = new List<Skill.SkillBase>();
+        public List<string> UseSkillList { get; set; }
+        public List<Skill.SkillBase> MySkill { get; set; } = new List<Skill.SkillBase>();
 
         public CharBase(string SetName, string SetRace, string SetSex, int SetHP, int SetATK, int SetDEF)
         {
             CharDate = new BaseInfo.Playeable(SetName, SetRace, SetSex);
             HP = new Numeric.ExNumber(SetHP, 0, SetHP);
             MP = new Numeric.ExNumber(0, 0, 0);
-            ATK = new Numeric.ExNumber(SetATK, 0, SetATK);
-            DEF = new Numeric.ExNumber(SetDEF, 0, SetDEF);
+            ATK = SetATK;
+            DEF = SetDEF;
         }
 
-        public void Attack(CharBase @char)
+        public void OnTurn(CharBase Enemy)
         {
-            var Damage = (ATK.Get() - (@char.DEF.Get() * @char.DEFBUFF));
-            DamegeShow(Damage, @char.CharDate.GetName());
-            @char.HP.Set(@char.HP.Get() - Damage);
+
         }
 
-        private void DamegeShow(Double Damege, string EnemyName)
+        public void Attack(CharBase Enemy)
         {
-            Console.WriteLine(CharDate.GetName() + "の攻撃！");
+            DamegeShow(DamageCalculation(Enemy, 0), Enemy.CharDate.GetName(),"通常攻撃");
+        }
+
+        public void SkillAttack(CharBase Enemy,int choice)
+        {
+            var skill = MySkill[choice];
+            DamegeShow(DamageCalculation(Enemy, 0), Enemy.CharDate.GetName(), "通常攻撃");
+        }
+
+        private Double DamageCalculation(CharBase Enemy,Double AttackPoint)
+        {
+            var Player = ATK * AttackPoint;
+            var EnemyDefence = (Enemy.DEF * Enemy.DEFBUFF);
+            var Damage = (Player - EnemyDefence);
+            Enemy.HP.Set(Enemy.HP.Get() - Damage);
+            return Damage;
+        }
+
+        private void DamegeShow(Double Damege, string EnemyName ,string Attack)
+        {
+            Console.WriteLine($"{CharDate.GetName()} + の{Attack}！");
             Console.WriteLine(EnemyName + "に" + Damege.ToString() + "のダメージ！");
         }
 
@@ -68,14 +86,9 @@ namespace LearningGameCsharp.Char
             return HP.IsEmpty();
         }
 
-        public void SetUseSkilInfo(List<string> list)
+        public void SetUseSkill(Dictionary<string, Skill.SkillBase> skilldic)
         {
-            UseSkillList = list;
-        }
-
-        public void SetUseSkill(Dictionary<string, Char.Skill.SkillBase> skilldic)
-        {
-            foreach(string SkillID in UseSkillList)
+            foreach (string SkillID in UseSkillList)
             {
                 MySkill.Add(skilldic[SkillID]);
             }

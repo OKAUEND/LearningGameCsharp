@@ -6,22 +6,22 @@ using System.Text;
 
 namespace LearningGameCsharp.Char.Skill
 {
-    class SkillBase
+    public abstract class SkillBase
     {
-        private string SkillID;
-        private string SkillName;
-        private Type SkillType;
-        private Double SkillRation;
-        private int HealRation;
-        private int SkillCostAP;
-        private int SkillTwoiceCostAP;
-        private int SkillCostM;
+        public string SkillID { get; set; }
+        public string SkillName { get; set; }
+        public Type SkillType { get; set; }
+        public string SkillTypeShowTrans { get; set; }
+        public Double SkillRation { get; set; }
+        public int SkillCostAP { get; set; }
+        public int SkillTwoiceCostAP { get; set; }
+        public int SkillCostM { get; set; }
 
-        public SkillBase(string ID, string name, IEnumerable<string> TypeList, string ration, int healRA, int costAP, int twiceAP)
+        public SkillBase(string ID, string name, IEnumerable<string> TypeList, string ration, int costAP, int twiceAP)
         {
             SkillID = ID;
             SkillName = name;
-            SetType(TypeJudgment(TypeList));
+            SetType(TypeList);
             SkillRation = Double.Parse(ration);
             SkillCostAP = costAP;
             SkillTwoiceCostAP = twiceAP;
@@ -50,38 +50,46 @@ namespace LearningGameCsharp.Char.Skill
 
         private void SetType(Type type) => SkillType |= type;
 
-        private Type TypeJudgment(IEnumerable<string> tyep)
+        private void SetType(IEnumerable<string> tyep)
         {
             Type SetType = new Type();
+            string typeTrans = string.Empty;
             foreach (string skill in tyep)
             {
                  switch(skill)
                 {
                     case "Attack":
                         SetType |= Type.Attack;
+                        typeTrans = "攻撃";
                         break;
                     case "Defense":
                         SetType |= Type.Defense;
+                        typeTrans = "防御";
                         break;
                     case "Buff":
                         SetType |= Type.Buff;
+                        typeTrans = "バフ";
                         break;
                     case "AllBuff":
                         SetType |= Type.AllBuff;
+                        typeTrans = "全体バフ";
                         break;
                     case "Debuff":
                         SetType |= Type.Debuff;
+                        typeTrans = "デバフ";
                         break;
                     case "AllDebuff":
                         SetType |= Type.AllDebuff;
+                        typeTrans = "全体デバフ";
                         break;
                     default:
                         SetType |= Type.Other;
+                        typeTrans = "その他";
                         break;
                 }
             }
-
-            return SetType;
+            SkillType |= SetType;
+            SkillTypeShowTrans = typeTrans;
         }
 
         
@@ -90,13 +98,9 @@ namespace LearningGameCsharp.Char.Skill
             return SkillID;
         }
 
-        public Dictionary<string, Char.Skill.SkillBase> SetSkill()
+        public virtual string Action()
         {
-
-
-
-            return null;
+            return "何もしない";
         }
-
     }
 }

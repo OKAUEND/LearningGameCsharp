@@ -42,8 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Char\Enemy.cs" />
     <Compile Include="Char\BaseInfo\Playeable.cs" />
     <Compile Include="Char\CharBase.cs" />
+    <Compile Include="Char\Player.cs" />
+    <Compile Include="Char\Skill\Attack.cs" />
+    <Compile Include="Char\Skill\Buff.cs" />
+    <Compile Include="Char\Skill\DeBuff.cs" />
+    <Compile Include="Char\Skill\Heal.cs" />
     <Compile Include="Char\Skill\SkillBase.cs" />
     <Compile Include="Numeric\ExNumber.cs" />
     <Compile Include="Program.cs" />
